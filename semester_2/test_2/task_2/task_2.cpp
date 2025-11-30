@@ -1,4 +1,4 @@
-#include <fstream>
+#include <iostream>
 #include <cmath>
 #include <iomanip>
 
@@ -30,21 +30,17 @@ int main()
     double eps = 0.001;
     double new_x = 0.0;
     double new_y = 0.0;
-    std::ofstream file("task_2.txt");
-    file << "x_0 = " << x << " y_0 = " << y << std::endl << std::endl;
-    if (!file.is_open())
-        return 1;
+    std::cout << "x_0 = " << x << " y_0 = " << y << std::endl << std::endl;
     for(int i = 1; i < 1000; i++)
     {
         new_x = phi_1(x, y);
         new_y = phi_2(x, y);
-        file << std::scientific << std::setprecision(7) << "x_" << i << " = " <<  new_x << " y_" << i << " = "  << new_y << std::endl;
-        file << "||x_" << i << " - x_" << i-1 << "|| = " << norm({new_x, new_y}, {x, y}) << std::endl << std::endl;
+        std::cout << std::scientific << std::setprecision(7) << "x_" << i << " = " <<  new_x << " y_" << i << " = "  << new_y << std::endl;
+        std::cout << "||x_" << i << " - x_" << i-1 << "|| = " << norm({new_x, new_y}, {x, y}) << std::endl << std::endl;
         if (norm({new_x, new_y}, {x, y}) < eps)
             break;
         x = new_x;
         y = new_y;    
     }
-    file.close();
     return 0;
 }
